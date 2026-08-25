@@ -1,0 +1,28 @@
+create database if not exists clinica_maria
+default character set utf8mb4
+collate  utf8mb4_0900_ai_ci ;
+
+use clinica_maria;
+
+create table if not exists pasciente(
+id int primary key auto_increment,
+nome varchar(30)not null,
+data_nascimento date,
+altura decimal (3,2),
+status_cadastro boolean,
+genero enum ("M","F","outros")
+) character set utf8mb4;
+
+create table if not exists medico(
+id int primary key auto_increment,
+nome varchar(30)
+) character set utf8mb4;
+
+create table if not exists consulta(
+id int primary key auto_increment,
+data_time datetime,
+ id_pasciente int,
+ id_medico int,
+ foreign key (id_pasciente) references pasciente(id),
+ foreign key (id_medico) references medico(id)
+ ) character set utf8mb4;
